@@ -1,0 +1,78 @@
+// ルール情報取得
+GET kbn:/api/detection_engine/rules/_find?filter=alert.attributes.name:振動_機械学習_異常検知
+
+// ルール情報修正
+PATCH kbn:/api/detection_engine/rules
+{
+  "id": "01f1b4c4-712a-4017-94c4-148f7cd226bc",
+  "from": "now-1500h"
+}
+
+// アラート検知情報取得
+GET .alerts-security.alerts-*/_search
+{
+  "sort": [{"@timestamp": "desc"}],
+  "size": 1,
+  "_source": [
+    "kibana.alert.rule.name",
+    "kibana.alert.start",
+    "@timestamp"
+  ]
+}
+
+// アラート検知情報削除
+POST .alerts-security.alerts-*/_delete_by_query
+{
+  "query": {
+    "match": {
+      "kibana.alert.rule.name": "振動_機械学習_異常検知"
+    }
+  }
+}
+
+// record_scoreを確認
+GET .ml-anomalies-shared/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": {"job_id": "vibration-anomaly-detection"}},
+        {"match": {"result_type": "record"}}
+      ]
+    }
+  },
+  "sort": [{"record_score": "desc"}],
+  "size": 5,
+  "_source": [
+    "timestamp",
+    "record_score",
+    "anomaly_score",
+    "result_type"
+  ]
+}
+
+GET .internal.alerts-security.alerts-default-000001/_search
+{
+  "sort": [{"@timestamp": "desc"}],
+  "size": 1
+}
+
+GET sensor-data-*/_search
+{
+  "size": 1
+}
+
+GET _ml/datafeeds/datafeed-vibration-anomaly-detection
+
+// ジョブの更新
+POST _ml/datafeeds/datafeed-vibration-anomaly-detection/_update
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match_all": {}},
+        {"term": {"device_id": "pump-01"}}
+      ]
+    }
+  }
+}
