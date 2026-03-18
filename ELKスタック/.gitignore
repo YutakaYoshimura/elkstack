@@ -1,0 +1,14 @@
+# 環境変数（パスワード含む）
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pkl
+
+# Elasticsearch データ
+es-data/
+
+# OS
+Thumbs.db
+.DS_Store

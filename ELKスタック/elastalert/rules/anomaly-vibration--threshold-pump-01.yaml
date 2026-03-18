@@ -1,0 +1,48 @@
+name: "異常検知アラート - pump-01 - 振動値固定閾値超過"
+type: any
+index: sensor-data-*
+
+timezone: "Asia/Tokyo"
+
+filter:
+  - term:
+      device_id.keyword: "pump-01"
+  - range:
+      vibration:
+        gte: 5.6        # 振動値5.6以上を
+
+alert:
+  - email
+
+email:
+  - yutaka.yoshimura0809@gmail.com
+
+from_addr: yutaka.yoshimura0809@gmail.com
+smtp_host: smtp.gmail.com
+smtp_port: 587
+smtp_ssl: false
+smtp_starttls: true
+smtp_auth_file: /opt/elastalert/smtp_auth.yaml
+
+alert_subject: "【振動異常アラート】{0} で振動上昇を検知"
+alert_subject_args:
+  - device_id
+
+alert_text: |
+  ━━━━━━━━━━━━━━━━━━━━━
+  ⚠️ 振動異常アラート
+  ━━━━━━━━━━━━━━━━━━━━━
+  設備ID:   {0}
+  振動値:   {1}
+  検知時刻: {2}
+  
+  ↓ Kibana でデータを確認する
+  http://localhost:5601
+
+alert_text_args:
+  - device_id
+  - vibration
+  - "@timestamp"
+
+realert:
+  minutes: 30

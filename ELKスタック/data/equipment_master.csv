@@ -1,0 +1,4 @@
+device_id,device_name,type,location
+pump-01,ポンプA-01,ポンプ,A棟1F
+pump-02,ポンプA-02,ポンプ,A棟1F
+motor-01,モーターB-01,モーター,B棟2F

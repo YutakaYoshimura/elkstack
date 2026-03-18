@@ -1,0 +1,32 @@
+name: "予知保全 - 異常検知アラート"
+type: any
+index: prediction-results
+realert:
+  minutes: 30
+
+filter:
+  - range:
+      anomaly_score:
+        gte: 0.7
+
+alert:
+  - debug
+
+alert_text: |
+  ━━━━━━━━━━━━━━━━━━━━━
+  ⚠️ 予知保全アラート【{0}】
+  ━━━━━━━━━━━━━━━━━━━━━
+  ■ 設備: {1}
+  ■ 予兆スコア: {2}
+  ■ 検知方法: ML推論（LightGBM）
+  ■ 振動: {3} / 温度: {4} / 電流: {5}
+  ■ ダッシュボード: http://localhost:5601/app/dashboards
+  ━━━━━━━━━━━━━━━━━━━━━
+
+alert_text_args:
+  - alert_level
+  - device_id
+  - anomaly_score
+  - vibration
+  - temperature
+  - current

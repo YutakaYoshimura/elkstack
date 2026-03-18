@@ -1,0 +1,16 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {"term": {"device_id.keyword": "pump-01"}},
+        {"range": {"@timestamp": {"gte": "2026-01-01", "lt": "2026-01-12"}}}
+      ]
+    }
+  },
+  "aggs": {
+    "vibration_stats": {
+      "extended_stats": {"field": "vibration"}
+    }
+  }
+}

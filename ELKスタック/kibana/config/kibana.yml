@@ -1,0 +1,14 @@
+server.host: "0.0.0.0"
+server.shutdownTimeout: "5s"
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+i18n.locale: "ja-JP"
+xpack.encryptedSavedObjects.encryptionKey: ee775af94cfddbe9172e29dc7f234861
+xpack.reporting.encryptionKey: 9f7b1cd80d03085222a48cf111b82ef0
+xpack.security.encryptionKey: 2de894fd799d3211ea755519aae6fefc
+xpack.actions.email.domain_allowlist:
+  - "gmail.com"           # 送信先として許可するドメイン
+
+xpack.actions.customHostSettings:
+  - url: smtp://smtp.gmail.com:587
+    smtp:
+      requireTLS: true

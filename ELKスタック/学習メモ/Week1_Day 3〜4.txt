@@ -1,0 +1,112 @@
+設備:     pump-01
+センサー: vibration
+期間:     2026-01-01 〜 2026-01-12（故障前の正常期間）
+
+count（データ件数）: 1584
+min（最小値）:       2.0299999713897705
+max（最大値）:       4.179999828338623
+avg（平均値）:       3.0016224753073972
+std（標準偏差）:     0.3074969488077973
+
+avg + 2σ = 3.0016224753073972 + 2 × 0.3074969488077973 = 3.61661637292298
+
+avg + 3σ は手計算で求める: avg + 3σ = avg + 3 × std_deviation
+avg + 3σ = 3.0016224753073972 + 3 × 0.3074969488077973 = 3.92411332173078
+
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1584,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "vibration_stats" : {
+      "count" : 1584,
+      "min" : 2.0299999713897705,
+      "max" : 4.179999828338623,
+      "avg" : 3.0016224753073972,
+      "sum" : 4754.570000886917,
+      "sum_of_squares" : 14421.198302749832,
+      "variance" : 0.09455437352610513,
+      "variance_population" : 0.09455437352610513,
+      "variance_sampling" : 0.09461410465277988,
+      "std_deviation" : 0.3074969488077973,
+      "std_deviation_population" : 0.3074969488077973,
+      "std_deviation_sampling" : 0.30759405822086333,
+      "std_deviation_bounds" : {
+        "upper" : 3.6166163729229917,
+        "lower" : 2.386628577691803,
+        "upper_population" : 3.6166163729229917,
+        "lower_population" : 2.386628577691803,
+        "upper_sampling" : 3.616810591749124,
+        "lower_sampling" : 2.3864343588656705
+      }
+    }
+  }
+}
+
+【故障前後（1/13〜1/20）との比較】
+故障前後の avg: 3.883012155070901
+故障前後の max: 6.519999980926514
+正常期間との avg の差: 3.883012155070901 - 3.0016224753073972 = 0.88138967976351
+
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1152,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "vibration_stats" : {
+      "count" : 1152,
+      "min" : 1.9700000286102295,
+      "max" : 6.519999980926514,
+      "avg" : 3.883012155070901,
+      "sum" : 4473.230002641678,
+      "sum_of_squares" : 18434.439528701794,
+      "variance" : 0.9243342500141662,
+      "variance_population" : 0.9243342500141662,
+      "variance_sampling" : 0.9251373206049691,
+      "std_deviation" : 0.9614230338483504,
+      "std_deviation_population" : 0.9614230338483504,
+      "std_deviation_sampling" : 0.9618405900173734,
+      "std_deviation_bounds" : {
+        "upper" : 5.805858222767601,
+        "lower" : 1.9601660873742002,
+        "upper_population" : 5.805858222767601,
+        "lower_population" : 1.9601660873742002,
+        "upper_sampling" : 5.806693335105647,
+        "lower_sampling" : 1.959330975036154
+      }
+    }
+  }
+}
+
+【自分が考える「仮の閾値」（Week 3 で使う）】
+
+私が設定する閾値: 3.9
+その理由:正常期間の 3.0 にstd 0.3 の３倍を足した 3.9 を設定。これは 96.1% がこの範囲に収まる値
+使う集計方法（瞬間値/直近平均）: ________
+その理由: ________________________________________

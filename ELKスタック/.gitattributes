@@ -1,0 +1,2 @@
+# シェルスクリプトは常に LF で管理する（CRLF だと Linux で実行エラーになる）
+*.sh text eol=lf

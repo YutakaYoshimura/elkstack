@@ -1,0 +1,10 @@
+device_id,sensor,lower_limit,upper_limit,unit
+pump-01,vibration,1.0,8.0,mm/s
+pump-01,temperature,20.0,75.0,°C
+pump-01,current,3.0,14.0,A
+pump-02,vibration,1.0,8.0,mm/s
+pump-02,temperature,20.0,75.0,°C
+pump-02,current,3.0,14.0,A
+motor-01,vibration,1.5,10.0,mm/s
+motor-01,temperature,25.0,85.0,°C
+motor-01,current,5.0,18.0,A
